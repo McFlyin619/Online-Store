@@ -62,6 +62,8 @@ function init() {
     console.log('Catalog Loaded');
 
     displayProducts();
+    
+
 }
 
 window.onload = init;
