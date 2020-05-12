@@ -86,18 +86,22 @@ function Clothes() {
     $('.Electronics').hide();
     $('.Clothes').show();
     $('.Toys').hide();
+    $('#clothesBread').addClass('active');
+    $('#clothesBread').remove('href');
 }
 
 function Electronics() {
     $('.Electronics').show();
     $('.Clothes').hide();
     $('.Toys').hide();
+    $('#electronicsBread').addClass('active');
 }
 
 function Toys() {
     $('.Electronics').hide();
     $('.Clothes').hide();
     $('.Toys').show();
+    $('#toysBread').addClass('active');
 }
 
 
