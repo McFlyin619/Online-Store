@@ -28,22 +28,24 @@ items = [
         title:'iPhone 11',
         price: 1000.00,
         desc: 'Introducing the iPhone 11 Pro. A transformative triple-camera system that adds tons of capability without complexity.',
-        category: 'Electronics',
+        category:'Electronics',
         image: 'https://target.scene7.com/is/image/Target/GUEST_0cd17c39-1581-46f5-aae6-ab646b1eaae0?wid=488&hei=488&fmt=pjpeg'
-    }
-];
+    },
+    
+]; 
 
 function displayCatalog() {
     // travel inside the array
     for ( i = 0; i < items.length; i++){
         var item = items[i];
         drawItem(item);
+        
     }
 }
 
 function drawItem(product) {
     var layout = `
-    <div id="${product.code}" class="card text-center">
+    <div id="${product.code}" class="${product.category} card text-center">
         <div class="card-header">
             <h2><b>${product.title}</b></h2>
         </div>
@@ -63,12 +65,14 @@ function drawItem(product) {
 
 }
 
+
+
 function Search() {
     var searchText = $('#txt-search').val();
 
     $('#catalog').html('');
 
-    for (var i = 0; i < items.length; i++){
+    for (var i = 0; i < items.length; i++) {
 
         var item = items[i];
 
@@ -77,6 +81,25 @@ function Search() {
         } 
     } 
 }
+
+function Clothes() {
+    $('.Electronics').hide();
+    $('.Clothes').show();
+    $('.Toys').hide();
+}
+
+function Electronics() {
+    $('.Electronics').show();
+    $('.Clothes').hide();
+    $('.Toys').hide();
+}
+
+function Toys() {
+    $('.Electronics').hide();
+    $('.Clothes').hide();
+    $('.Toys').show();
+}
+
 
 function init() {
 
@@ -90,7 +113,7 @@ function init() {
         var searchText = $('#txt-search').val();
 
         for ( var i = 0; i < items.length; i++) {
-            if(searchText == '') {
+            if(searchText = '') {
                 $('#' + items[i].code).show();
             }
         }

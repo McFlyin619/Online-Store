@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="css/catalog.css">
     <title>Online Store</title>
@@ -25,11 +26,19 @@
             </ul>
           <div class="form-inline my-2 my-lg-0">
             <input id="txt-search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button id="btn-search" class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+            <button id="btn-search" class="btn btn-outline-light my-2 my-sm-0" type="button">Search</button>
           </div>
         </div>
     </nav>
-
+    <nav aria-label="breadcrumb">
+        <ol id="categories" class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">Categories:</li>
+          <li class="breadcrumb-item"><a onclick="Clothes();" href="#">Clothes</a></li>
+          <li class="breadcrumb-item"><a onclick="Electronics();" href="#">Electronics</a></li>
+          <li class="breadcrumb-item"><a onclick="Toys();" href="#">Toys</a></li>
+        </ol>
+      </nav>
+    </nav>
     <div class="container">
       <h1 class="tc">Products Catalog</h1>
         <div class="col">
@@ -39,7 +48,7 @@
             </div>
         </div>
     </div>
-    
+
     <script src="script/catalog.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
