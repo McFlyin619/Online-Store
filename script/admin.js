@@ -1,3 +1,4 @@
+var serverURL = 'http://restclass.azurewebsites.net/API/';
 let items = [];
 
 class Item {
@@ -8,6 +9,7 @@ class Item {
         this.description = description;
         this.category = category;
         this.image = image;
+        this.user = 'OBrien';
     }
 }
 
@@ -21,15 +23,41 @@ function register() {
     var category = $('#category').val();
     var image = $('#image').val();
 
-    // create the object (using the constructor)
-    var newItem = new Item(code,title,price,desc,category,image);
+    if (code!='' && title != '' && price !='' && category != ''){
+        // create the object (using the constructor)
+        var newItem = new Item(code,title,price,desc,category,image);
+        // push the item to array
+        items.push(newItem);
 
-    // push the item to array
-    items.push(newItem);
+        var jsonString = JSON.stringify(newItem);
 
-    // display on the console
-    console.log(newItem);
-    console.log(items);
+        // display on the console
+        console.log(jsonString);
+        console.log(newItem);
+        console.log(items);
+    }
+    
+    $.ajax({
+        url:serverURL+'points',
+        type:'POST',
+        contentType:'application/json',
+        data:jsonString,
+        success: function(response){
+            console.log('It Works',response);
+            // show notification
+            $('#success').removeClass('hidden');
+            // hide notification
+            setTimeout(function(){
+                $('#success').addClass('hidden');
+            },5000);
+        },
+        error: function(errorDetails) {
+            console.log('Something went wrong....', errorDetails);
+            $('#error').show();
+            $('#error').hide(5000);
+        }
+    });
+
 
     $('#code').val('');
     $('#title').val('');
@@ -39,10 +67,6 @@ function register() {
     $('#image').val('');
 
 }
-
-
-
-
 
 function init() {
     console.log('Admin Loaded');

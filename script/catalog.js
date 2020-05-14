@@ -13,7 +13,7 @@ items = [
         price:9.99,
         desc:'Basic nerf gun',
         category:'Toys',
-        image:'https://target.scene7.com/is/image/Target/GUEST_c5702f01-36b9-4875-a094-2803d57b175d?wid=325&hei=325&qlt=80&fmt=webp'
+        image:'https://target.scene7.com/is/image/Target/GUEST_8e760c54-c129-4bf4-8665-a29d8afbda72?wid=488&hei=488&fmt=pjpeg'
     },
     {
         code:'4455',
@@ -21,7 +21,7 @@ items = [
         price: 12.99,
         desc:'100% cotton tshirt',
         category:'Clothes',
-        image:'https://img.ltwebstatic.com/images2_pi/2019/03/19/15529817302924517509_thumbnail_600x799.webp'
+        image:'https://shop.totalrocky.com/wp-content/uploads/2019/05/contenders-rocky-legends-tshirt.jpg'
     },
     {
         code:'6677',
