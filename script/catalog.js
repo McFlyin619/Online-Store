@@ -110,7 +110,6 @@ function init() {
     console.log('Catalog Loaded');
     fetchCatalog();
     
-   
     $('#btn-search').click(Search);
 
     $('#txt-search').change(function(){

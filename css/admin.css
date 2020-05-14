@@ -2,6 +2,9 @@
    --primary: #17a2b8; 
    --secondary: rgb(211, 211, 211);
 }
+body {
+    background-color:var(--secondary);
+}
 
 .nav-link {
     font-size: 1.2rem;
@@ -35,4 +38,11 @@
 
 .alert {
     margin-top: 2rem;
+    text-shadow: 1px 1px 2px white;
+    font-weight: 800;
+    font-size: 1.3rem;
+}
+
+#alerts {
+    height: 4.5rem;
 }

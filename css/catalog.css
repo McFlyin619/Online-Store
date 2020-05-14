@@ -2,6 +2,9 @@
     --primary: #17a2b8; 
     --secondary: rgb(211, 211, 211);
 }
+body {
+  background-color:var(--secondary);
+}
 
 img {
   height: 30%;
@@ -46,3 +49,4 @@ ol li a:hover {
   color: black;
   text-decoration: none;
 }
+
