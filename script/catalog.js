@@ -1,40 +1,65 @@
-items = [
-    {
-        code: '1122',
-        title: 'Samsung TV',
-        price: 1180,
-        desc: '65 inch Samsung 4k curved TV',
-        category: 'Electronics',
-        image: 'https://c1.neweggimages.com/ProductImage/16C-0003-004J4-S01.jpg'
-    },
-    {
-        code: '2233',
-        title:'NERF N-Strike Elite Disruptor Blaster',
-        price:9.99,
-        desc:'Basic nerf gun',
-        category:'Toys',
-        image:'https://target.scene7.com/is/image/Target/GUEST_8e760c54-c129-4bf4-8665-a29d8afbda72?wid=488&hei=488&fmt=pjpeg'
-    },
-    {
-        code:'4455',
-        title:'T-Shirt',
-        price: 12.99,
-        desc:'100% cotton tshirt',
-        category:'Clothes',
-        image:'https://shop.totalrocky.com/wp-content/uploads/2019/05/contenders-rocky-legends-tshirt.jpg'
-    },
-    {
-        code:'6677',
-        title:'iPhone 11',
-        price: 1000.00,
-        desc: 'Introducing the iPhone 11 Pro. A transformative triple-camera system that adds tons of capability without complexity.',
-        category:'Electronics',
-        image: 'https://target.scene7.com/is/image/Target/GUEST_0cd17c39-1581-46f5-aae6-ab646b1eaae0?wid=488&hei=488&fmt=pjpeg'
-    },
+// items = [
+//     {
+//         code: '1122',
+//         title: 'Samsung TV',
+//         price: 1180,
+//         desc: '65 inch Samsung 4k curved TV',
+//         category: 'Electronics',
+//         image: 'https://c1.neweggimages.com/ProductImage/16C-0003-004J4-S01.jpg'
+//     },
+//     {
+//         code: '2233',
+//         title:'NERF N-Strike Elite Disruptor Blaster',
+//         price:9.99,
+//         desc:'Basic nerf gun',
+//         category:'Toys',
+//         image:'https://target.scene7.com/is/image/Target/GUEST_8e760c54-c129-4bf4-8665-a29d8afbda72?wid=488&hei=488&fmt=pjpeg'
+//     },
+//     {
+//         code:'4455',
+//         title:'T-Shirt',
+//         price: 12.99,
+//         desc:'100% cotton tshirt',
+//         category:'Clothes',
+//         image:'https://shop.totalrocky.com/wp-content/uploads/2019/05/contenders-rocky-legends-tshirt.jpg'
+//     },
+//     {
+//         code:'6677',
+//         title:'iPhone 11',
+//         price: 1000.00,
+//         desc: 'Introducing the iPhone 11 Pro. A transformative triple-camera system that adds tons of capability without complexity.',
+//         category:'Electronics',
+//         image: 'https://target.scene7.com/is/image/Target/GUEST_0cd17c39-1581-46f5-aae6-ab646b1eaae0?wid=488&hei=488&fmt=pjpeg'
+//     },
     
-]; 
+// ]; 
+
+var serverURL = 'http://restclass.azurewebsites.net/API/';
+var items = [];
+
+function fetchCatalog() {
+    // get items from server
+    $.ajax({
+        url: serverURL+"points",
+        type: "GET",
+        success: function(res){
+            console.log('Get works',res);
+            for(var i = 0; i < res.length; i++) {
+
+                if(res[i].user == 'OBrien' && res[i].title != '' && res[i].description != '' && res[i].category != '' && res[i].code != '' && res[i].image != ''){
+                    items.push(res[i]);
+                }
+            }
+            displayCatalog();
+        },
+        error: function(details){
+            console.log('Get error',details);
+        }
+    });
+}
 
 function displayCatalog() {
+    
     // travel inside the array
     for ( i = 0; i < items.length; i++){
         var item = items[i];
@@ -52,7 +77,7 @@ function drawItem(product) {
         <div class="card-body">
             <h3 class="card-title">$${product.price}</h3>
             <img src="${product.image}" alt="">
-            <p class="card-text">${product.desc}</p>
+            <p class="card-text">${product.description}</p>
             <button class="btn btn-outline-info btn-block">Add to cart</button>
         </div>
         <div class="card-footer text-muted">
@@ -65,8 +90,6 @@ function drawItem(product) {
 
 }
 
-
-
 function Search() {
     var searchText = $('#txt-search').val();
 
@@ -76,40 +99,17 @@ function Search() {
 
         var item = items[i];
 
-        if (item.title.toLowerCase().includes(searchText) || item.desc.toLowerCase().includes(searchText) || item.category.toLowerCase().includes(searchText) || item.price.toString().includes(searchText) || item.code.toString().includes(searchText)){
+        if (item.title.toLowerCase().includes(searchText) || item.description.toLowerCase().includes(searchText) || item.category.toLowerCase().includes(searchText) || item.price.toString().includes(searchText) || item.code.toString().includes(searchText)){
             drawItem(item);
         } 
     } 
 }
 
-function Clothes() {
-    $('.Electronics').hide();
-    $('.Clothes').show();
-    $('.Toys').hide();
-    $('#clothesBread').addClass('active');
-    $('#clothesBread').remove('href');
-}
-
-function Electronics() {
-    $('.Electronics').show();
-    $('.Clothes').hide();
-    $('.Toys').hide();
-    $('#electronicsBread').addClass('active');
-}
-
-function Toys() {
-    $('.Electronics').hide();
-    $('.Clothes').hide();
-    $('.Toys').show();
-    $('#toysBread').addClass('active');
-}
-
-
 function init() {
 
     console.log('Catalog Loaded');
-
-    displayCatalog();
+    fetchCatalog();
+    
    
     $('#btn-search').click(Search);
 
@@ -117,9 +117,16 @@ function init() {
         var searchText = $('#txt-search').val();
 
         for ( var i = 0; i < items.length; i++) {
-            if(searchText = '') {
-                $('#' + items[i].code).show();
+            if(searchText == '') {
+                drawItem(items[i]);
             }
+        }
+    });
+
+    $('#txt-search').keypress(function(e){
+        console.log(e);
+        if(e.keyCode == 13){
+            Search();
         }
     });
 
