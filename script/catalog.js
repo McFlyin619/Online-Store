@@ -34,38 +34,27 @@
     
 // ]; 
 
-var serverURL = 'http://restclass.azurewebsites.net/API/';
+var serverURL = 'http://localhost:8080/API/';
 var items = [];
 
 function fetchCatalog() {
     // get items from server
     $.ajax({
-        url: serverURL+"points",
+        url: serverURL+"items",
         type: "GET",
-        success: function(res){
+        success: (res) => {
             console.log('Get works',res);
+            // this will travel the array that the server sends back
             for(var i = 0; i < res.length; i++) {
-
-                if(res[i].user == 'OBrien' && res[i].title != '' && res[i].description != '' && res[i].category != '' && res[i].code != '' && res[i].image != ''){
-                    items.push(res[i]);
-                }
+                var item = res[i];
+                drawItem(item); // send each item to draw on the HTML
             }
-            displayCatalog();
+            
         },
-        error: function(details){
+        error: (details) => {
             console.log('Get error',details);
         }
     });
-}
-
-function displayCatalog() {
-    
-    // travel inside the array
-    for ( i = 0; i < items.length; i++){
-        var item = items[i];
-        drawItem(item);
-        
-    }
 }
 
 function drawItem(product) {
@@ -112,7 +101,7 @@ function init() {
     
     $('#btn-search').click(Search);
 
-    $('#txt-search').change(function(){
+    $('#txt-search').change(() => {
         var searchText = $('#txt-search').val();
 
         for ( var i = 0; i < items.length; i++) {
@@ -122,7 +111,7 @@ function init() {
         }
     });
 
-    $('#txt-search').keypress(function(e){
+    $('#txt-search').keypress((e) => {
         console.log(e);
         if(e.keyCode == 13){
             Search();

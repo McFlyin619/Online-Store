@@ -1,4 +1,4 @@
-var serverURL = 'http://restclass.azurewebsites.net/API/';
+var serverURL = 'http://localhost:8080/API/';
 let items = [];
 
 class Item {
@@ -38,7 +38,7 @@ function register() {
     }
     
     $.ajax({
-        url:serverURL+'points',
+        url:serverURL+'items',
         type:'POST',
         contentType:'application/json',
         data:jsonString,
