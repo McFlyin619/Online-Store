@@ -42,7 +42,7 @@ function register() {
         type:'POST',
         contentType:'application/json',
         data:jsonString,
-        success: function(response){
+        success:(response) => {
             console.log('It Works',response);
             // show notification
             $('#success').removeClass('hidden');
@@ -51,7 +51,7 @@ function register() {
                 $('#success').addClass('hidden');
             },5000);
         },
-        error: function(errorDetails) {
+        error: (errorDetails) => {
             console.log('Something went wrong....', errorDetails);
             $('#error').show();
             $('#error').hide(5000);
@@ -71,7 +71,7 @@ function register() {
 function init() {
     console.log('Admin Loaded');
 
-    $('#btn-register').on('click',function(){
+    $('#btn-register').on('click',() => {
         register();
     });
 }

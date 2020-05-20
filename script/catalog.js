@@ -101,7 +101,7 @@ function init() {
     
     $('#btn-search').click(Search);
 
-    $('#txt-search').change(() => {
+    $('#txt-search').change(function() {
         var searchText = $('#txt-search').val();
 
         for ( var i = 0; i < items.length; i++) {
@@ -111,7 +111,7 @@ function init() {
         }
     });
 
-    $('#txt-search').keypress((e) => {
+    $('#txt-search').keypress(function(e) {
         console.log(e);
         if(e.keyCode == 13){
             Search();
